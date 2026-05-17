@@ -7,6 +7,10 @@ pulses_to_show = 1;
 file_id = fopen('lab4_data1.txt', 'r');
 file_content = fread(file_id, '*char').';
 fclose(file_id);
+% delete utf-8 BOM
+if file_content(1:3) == [239 187 191]
+  file_content = file_content(4:end);
+end % if
 
 lines = strsplit(strtrim(file_content));
 signal = zeros(size(lines));
